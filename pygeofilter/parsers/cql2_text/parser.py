@@ -128,7 +128,11 @@ class CQLTransformer(WKTTransformer, ISO8601Transformer):
         op = op.lower()
         return SPATIAL_PREDICATES_MAP[op](lhs, rhs)
 
-    def binary_temporal_predicate(self, lhs, op, rhs):
+    def binary_temporal_predicate_1(self, lhs, op, rhs):
+        op = op.lower()
+        return TEMPORAL_PREDICATES_MAP[op](lhs, rhs)
+
+    def binary_temporal_predicate_2(self, op, lhs, rhs):
         op = op.lower()
         return TEMPORAL_PREDICATES_MAP[op](lhs, rhs)
 
