@@ -112,7 +112,7 @@
      | "-" atom                                                             -> neg
      | "(" expression ")"
 
-func: attribute "(" expression ("," expression)* ")" -> function
+func.2: attribute "(" expression ("," expression)* ")" -> function
 
 
 ?literal: timestamp
@@ -144,7 +144,7 @@ DATETIME: /[0-9]{4}-?[0-1][0-9]-?[0-3][0-9][T ][0-2][0-9]:?[0-5][0-9]:?[0-5][0-9
                   | timestamp
                   | "'..'"
                   | attribute
-                  | func
+                  | func.2
 
 
 
