@@ -423,7 +423,7 @@ def test_casei_function():
 def test_parse_temporal_filter():
     result = parse("T_AFTER(start_datetime,TIMESTAMP('2023-06-01T12:00:00.509000'))")
     assert result == ast.TimeAfter(
-        ast.Attribute("start_datetime"), datetime.datetime(2023, 6, 1, 12, 0, 0, 509000)
+        ast.Attribute("start_datetime"), datetime(2023, 6, 1, 12, 0, 0, 509000)
     )
 
 
@@ -436,7 +436,7 @@ def test_parse_advanced_temporal_filter():
             start=ast.Attribute("start_datetime"), end=ast.Attribute("end_datetime")
         ),
         Interval(
-            start=datetime.datetime(2024, 5, 27, 9, 44, 12, 509000),
-            end=datetime.datetime(2024, 5, 27, 9, 44, 13, 509000),
+            start=datetime(2024, 5, 27, 9, 44, 12, 509000),
+            end=datetime(2024, 5, 27, 9, 44, 13, 509000),
         ),
     )
