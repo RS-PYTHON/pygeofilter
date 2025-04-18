@@ -77,8 +77,8 @@ class Envelope:
 
 @dataclass
 class Interval:
-    start: Optional[Union[date, datetime, timedelta]] = None
-    end: Optional[Union[date, datetime, timedelta]] = None
+    start: Optional[Union[Any, date, datetime, timedelta]] = None
+    end: Optional[Union[Any, date, datetime, timedelta]] = None
 
     def get_sub_nodes(self) -> List[Any]:  # TODO: find way to type this
         return [self.start, self.end]
