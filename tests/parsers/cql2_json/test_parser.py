@@ -256,6 +256,25 @@ def test_attribute_toverlaps_open_dt():
     )
 
 
+def test_attribute_tintersects_open_dt():
+    result = parse(
+        {
+            "op": "t_intersects",
+            "args": [
+                {"property": "attr"},
+                {"interval": ["..", "2000-01-01T00:00:03Z"]},
+            ],
+        }
+    )
+    assert result == ast.TimeIntersects(
+        ast.Attribute("attr"),
+        values.Interval(
+            None,
+            datetime(2000, 1, 1, 0, 0, 3, tzinfo=StaticTzInfo("Z", timedelta(0))),
+        ),
+    )
+
+
 def test_attribute_overlappedby_dt_open():
     result = parse(
         {
