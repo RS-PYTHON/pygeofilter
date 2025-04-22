@@ -208,7 +208,7 @@ def test_attribute_t_intersects():
     result = parse(
         "attr T_INTERSECTS INTERVAL('2000-01-01T00:00:00Z', '2000-01-01T00:00:01Z')"
     )
-    assert result == ast.TimeOverlaps(
+    assert result == ast.TimeIntersects(
         ast.Attribute("attr"),
         values.Interval(
             datetime(2000, 1, 1, 0, 0, 0, tzinfo=StaticTzInfo("Z", timedelta(0))),
