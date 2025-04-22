@@ -48,7 +48,7 @@ TEMPORAL_PREDICATES_MAP: Dict[str, Type[ast.TemporalPredicate]] = {
     "t_ends": ast.TimeEnds,
     "t_endedby": ast.TimeEndedBy,
     "t_equals": ast.TimeEquals,
-    "t_intersects": ast.TimeOverlaps,
+    "t_intersects": ast.TimeIntersects,
 }
 
 
