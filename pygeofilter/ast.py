@@ -329,6 +329,7 @@ class TemporalComparisonOp(Enum):
     METBY = "METBY"
     TOVERLAPS = "TOVERLAPS"
     OVERLAPPEDBY = "OVERLAPPEDBY"
+    TINTERSECTS = "TINTERSECTS"
 
     BEFORE_OR_DURING = "BEFORE OR DURING"
     DURING_OR_AFTER = "DURING OR AFTER"
@@ -417,6 +418,11 @@ class TimeOverlaps(TemporalPredicate):
 @dataclass
 class TimeOverlappedBy(TemporalPredicate):
     op: ClassVar[TemporalComparisonOp] = TemporalComparisonOp.OVERLAPPEDBY
+
+
+@dataclass
+class TimeIntersects(TemporalPredicate):
+    op: ClassVar[TemporalComparisonOp] = TemporalComparisonOp.TINTERSECTS
 
 
 @dataclass
