@@ -89,6 +89,9 @@ def walk_cql_json(node: JsonType):  # noqa: C901
             if isinstance(value, dict) and "property" in value:
                 parsed.append(ast.Attribute(value["property"]))
                 continue
+            if isinstance(value, dict) and "op" in value:
+                parsed.append(walk_cql_json(value))
+                continue
             if value == "..":
                 parsed.append(None)
                 continue

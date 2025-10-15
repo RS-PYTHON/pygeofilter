@@ -25,6 +25,7 @@
 # THE SOFTWARE.
 # ------------------------------------------------------------------------------
 
+from ast import Add, Sub
 import json
 from datetime import date, datetime, timedelta
 
@@ -744,4 +745,53 @@ def test_function_multi_properties():
             datetime(2000, 1, 1, 0, 0, 0, tzinfo=StaticTzInfo("Z", timedelta(0))),
             datetime(2000, 1, 1, 0, 0, 1, tzinfo=StaticTzInfo("Z", timedelta(0))),
         ),
+    )
+
+
+def test_operation_in_interval():
+    result = parse(
+        {
+            "op": "t_contains",
+            "args": [
+                {
+                    "interval": [
+                        {"property": "start_datetime"},
+                        {"property": "end_datetime"},
+                    ]
+                },
+                {
+                    "interval": [
+                        {
+                            "op": "-",
+                            "args": [
+                                {
+                                "timestamp": "2000-01-01T00:00:00Z"
+                                },
+                                3600.0
+                            ]
+                        },
+                        {
+                            "op": "+",
+                            "args": [
+                                {
+                                "timestamp": "2000-01-01T01:00:00Z"
+                                },
+                                3600.0
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+    )
+
+    assert result == ast.TimeContains(
+        values.Interval(
+            ast.Attribute("start_datetime"),
+            ast.Attribute("end_datetime"),
+        ),
+        values.Interval(
+            ast.Sub(datetime(2000, 1, 1, 0, 0, 0, tzinfo=StaticTzInfo("Z", timedelta(0))), 3600.0),
+            ast.Add(datetime(2000, 1, 1, 1, 0, 0, tzinfo=StaticTzInfo("Z", timedelta(0))), 3600.0)
+        )
     )
